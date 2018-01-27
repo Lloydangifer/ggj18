@@ -10,13 +10,19 @@ var direction = 1.0
 var base_gravity = get_gravity_scale()
 var spawn_point
 var teleport_cooldown = 1.0
-var teleport_cooldown_progress =0.0
+var teleport_cooldown_progress = 0.0
 var has_sword = rand_range(0.0, 1.0) > 0.5
 var heavy = rand_range(0.0, 1.0) > 0.5
 var big = rand_range(0.0, 1.0) > 0.5
 var sword_pos_out
 var sword_pos_sheathe
 var big_scale = 2
+var dash_cooldown = 5.0
+var dash_cooldown_progress = 0.0
+var is_dashing = false
+var dashing_duration = 0.5
+var dashing_vanish_progress = 0.0
+var dash_speed_factor = 5.0
 
 func _ready():
 	spawn_point = get_pos()
@@ -25,6 +31,10 @@ func _ready():
 	get_node("foot").connect("body_enter",self,"on_foot_body_enter")
 	if not Input.is_joy_known(player_number-1):
 		print("ATTENTION, la manette ", player_number, " n'est pas détectée !!")
+	randomize()
+	has_sword = randf() > 0.5
+	heavy = randf() > 0.5
+	big = randf() > 0.5
 	if has_sword:
 		get_node("attack").set_scale(Vector2(4.0,1.0))
 	else:
@@ -48,6 +58,15 @@ func _process(delta):
 	elif Input.is_action_pressed("character_" + String(player_number) + "_teleport"):
 		#teleport()
 		teleport_cooldown_progress = 0
+	
+	if dash_cooldown_progress < dash_cooldown:
+		dash_cooldown_progress += delta
+	
+	if is_dashing:
+		dashing_vanish_progress += delta
+		if dashing_vanish_progress >= dashing_duration:
+			is_dashing = false
+			dashing_vanish_progress = 0.0
 	
 	if Input.is_action_pressed("character_" + String(player_number) + "_respawn"):
 		respawn()
@@ -86,13 +105,27 @@ func _fixed_process(delta):
 		else:
 			set_gravity_scale(base_gravity)
 	set_scale(get_scale()*Vector2(direction, 1.0))
-	set_linear_velocity(Vector2(velocity_x, get_linear_velocity().y))
+	if !is_dashing:
+		set_linear_velocity(Vector2(velocity_x, get_linear_velocity().y))
 	
 	if Input.is_action_pressed("character_" + String(player_number) + "_jump") and !has_jumped:
 		set_linear_velocity(Vector2(velocity_x, 0))
 		apply_impulse(Vector2(), Vector2(0, -speed * jump_factor * delta))
 		has_jumped = true
 		get_node("AnimationPlayer").play("jump")
+	
+	if Input.is_action_pressed("character_" + String(player_number) + "_dash_left"):
+		if dash_cooldown_progress >= dash_cooldown:
+			velocity_x = -speed * delta * dash_speed_factor
+			apply_impulse(Vector2(), Vector2(velocity_x, get_linear_velocity().y))
+			dash_cooldown_progress = 0.0
+			is_dashing = true
+	if Input.is_action_pressed("character_" + String(player_number) + "_dash_right"):
+		if dash_cooldown_progress >= dash_cooldown:
+			velocity_x = speed * delta * dash_speed_factor
+			apply_impulse(Vector2(), Vector2(velocity_x, get_linear_velocity().y))
+			dash_cooldown_progress = 0.0
+			is_dashing = true
 
 func on_foot_body_enter(body):
 	if body != self:
