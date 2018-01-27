@@ -1,23 +1,45 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scenes/character/character.gd" type="Script" id=1]
-[ext_resource path="res://common/stand.png" type="Texture" id=2]
+[ext_resource path="res://scenes/character/character.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 31.248, 77.5038 )
+extents = Vector2( 38.7802, 109.272 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 12.1533, 10 )
+extents = Vector2( 28.5484, 10 )
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "run"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.15 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
 
 [node name="character" type="RigidBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 0.5, 0, 0, 0.35, 0, 0 )
+shapes/0/transform = Matrix32( 0.7, 0, 0, 0.35, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -41,16 +63,19 @@ player_number = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.021, 0.021 )
+transform/pos = Vector2( 0.0760639, 0 )
+transform/scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
+hframes = 2
+frame = 1
 
 [node name="foot" type="Area2D" parent="."]
 
-transform/pos = Vector2( -0.370386, 77.8886 )
+transform/pos = Vector2( 0, 40 )
 transform/scale = Vector2( 0.920047, 0.219713 )
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 1.54044, -233.44 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -59,15 +84,46 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="foot"]
 
-transform/pos = Vector2( 1.54044, -233.44 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/scale = Vector2( 0.5, 0.35 )
+transform/scale = Vector2( 0.7, 0.35 )
 shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/run = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="attack" type="Area2D" parent="."]
+
+transform/pos = Vector2( -37.0633, -9.75349 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 
