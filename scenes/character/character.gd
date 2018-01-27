@@ -31,22 +31,28 @@ func _process(delta):
 		respawn()
 	
 	if Input.is_action_pressed("character_" + String(player_number) + "_attack"):
-		var targets = get_node("attack").get_overlapping_bodies()
-		for target in targets:
-			if target != self:
-				target.death()
+		if Input.is_action_pressed("character_" + String(player_number) + "_up"):
+			var targets = get_node("attack_up").get_overlapping_bodies()
+			for target in targets:
+				if target != self:
+					target.death()
+		else:
+			var targets = get_node("attack").get_overlapping_bodies()
+			for target in targets:
+				if target != self:
+					target.death()
 
 func _fixed_process(delta):
 	var velocity_x = 0
 	if Input.is_action_pressed("character_" + String(player_number) + "_left"):
 		direction = 1.0
 		velocity_x = -speed * delta
-		if not get_node("AnimationPlayer").is_playing():
+		if not get_node("AnimationPlayer").is_playing() and !has_jumped:
 			get_node("AnimationPlayer").play("run");
 	elif Input.is_action_pressed("character_" + String(player_number) + "_right"):
 		direction = -1.0
 		velocity_x = speed * delta
-		if not get_node("AnimationPlayer").is_playing():
+		if not get_node("AnimationPlayer").is_playing() and !has_jumped:
 			get_node("AnimationPlayer").play("run");
 	elif get_node("AnimationPlayer").is_playing():
 		get_node("AnimationPlayer").stop()
@@ -63,6 +69,7 @@ func _fixed_process(delta):
 		set_linear_velocity(Vector2(velocity_x, 0))
 		apply_impulse(Vector2(), Vector2(0, -speed * jump_factor * delta))
 		has_jumped = true
+		get_node("AnimationPlayer").play("jump");
 
 func on_foot_body_enter(body):
 	if body != self:
