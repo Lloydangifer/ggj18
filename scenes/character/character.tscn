@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scenes/character/character.gd" type="Script" id=1]
 [ext_resource path="res://scenes/character/character.png" type="Texture" id=2]
+[ext_resource path="res://common/sword.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -16,18 +17,36 @@ extents = Vector2( 55.4156, 10 )
 [sub_resource type="Animation" id=3]
 
 resource/name = "attack"
-length = 0.4
+length = 0.41
 loop = false
-step = 0.1
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
+"times": FloatArray( 0, 0.2, 0.4 ),
+"transitions": FloatArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ 4, 5, 6 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.2, 0.4 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "show_sword"
+}, {
+"args": [  ],
+"method": "sheathe"
+}, {
+"args": [  ],
+"method": "hide_sword"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -62,12 +81,29 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="Animation" id=6]
+
+resource/name = "stand"
+length = 0.01
+loop = false
+step = 1e-05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
 extents = Vector2( 45.1952, 4.60667 )
@@ -103,7 +139,7 @@ player_number = 1
 transform/pos = Vector2( 0.0760639, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
-vframes = 3
+vframes = 4
 hframes = 2
 frame = 4
 
@@ -145,6 +181,7 @@ root/root = NodePath("..")
 anims/attack = SubResource( 3 )
 anims/jump = SubResource( 4 )
 anims/run = SubResource( 5 )
+anims/stand = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -154,8 +191,8 @@ autoplay = ""
 
 transform/pos = Vector2( -52.1812, -22.433 )
 input/pickable = true
-shapes/0/shape = SubResource( 6 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.2781, -24.5466 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -164,7 +201,8 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
 
-shape = SubResource( 6 )
+transform/pos = Vector2( -11.2781, -24.5466 )
+shape = SubResource( 7 )
 trigger = false
 _update_shape_index = 0
 
@@ -172,7 +210,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( 1.46301, -80.9294 )
 input/pickable = true
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 8 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -182,8 +220,16 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_up"]
 
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 trigger = false
 _update_shape_index = 0
+
+[node name="sword" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( -97, -46.5 )
+transform/rot = 270.0
+transform/scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 3 )
 
 

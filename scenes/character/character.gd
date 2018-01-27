@@ -11,6 +11,7 @@ var base_gravity = get_gravity_scale()
 var spawn_point
 var teleport_cooldown = 1.0
 var teleport_cooldown_progress =0.0
+var has_sword = true
 
 func _ready():
 	spawn_point = get_pos()
@@ -19,6 +20,10 @@ func _ready():
 	get_node("foot").connect("body_enter",self,"on_foot_body_enter")
 	if not Input.is_joy_known(player_number-1):
 		print("ATTENTION, la manette ", player_number, " n'est pas détectée !!")
+	if has_sword:
+		get_node("attack").set_scale(Vector2(4.0,1.0))
+	else:
+		get_node("attack").set_scale(Vector2(1.0,1.0))
 
 func _process(delta):
 	if teleport_cooldown_progress < teleport_cooldown:
@@ -56,7 +61,7 @@ func _fixed_process(delta):
 		if not get_node("AnimationPlayer").is_playing() and !has_jumped:
 			get_node("AnimationPlayer").play("run");
 	elif get_node("AnimationPlayer").is_playing() and get_node("AnimationPlayer").get_current_animation() == "run":
-		get_node("AnimationPlayer").stop()
+		get_node("AnimationPlayer").play("stand")
 	
 	if has_jumped:
 		if Input.is_action_pressed("character_" + String(player_number) + "_down"):
@@ -76,6 +81,7 @@ func on_foot_body_enter(body):
 	if body != self:
 		has_jumped = false
 		set_gravity_scale(base_gravity)
+		get_node("AnimationPlayer").play("stand")
 
 func respawn():
 	set_pos(spawn_point)
@@ -90,3 +96,18 @@ func teleport():
 
 func death():
 	queue_free()
+	
+func show_sword():
+	if has_sword:
+		get_node("sword").set_rotd(270)
+		get_node("sword").set_pos(Vector2(-97.0, -46.5))
+		get_node("sword").set_hidden(false)
+
+func sheathe():
+	if has_sword:
+		get_node("sword").set_rotd(50)
+		get_node("sword").set_pos(Vector2(-6.0, -8.5))
+		
+func hide_sword():
+	if has_sword:
+		get_node("sword").set_hidden(true)
