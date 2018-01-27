@@ -24,7 +24,7 @@ func _process(delta):
 	if teleport_cooldown_progress < teleport_cooldown:
 		teleport_cooldown_progress += delta
 	elif Input.is_action_pressed("character_" + String(player_number) + "_teleport"):
-		teleport()
+		#teleport()
 		teleport_cooldown_progress = 0
 	
 	if Input.is_action_pressed("character_" + String(player_number) + "_respawn"):
@@ -41,6 +41,7 @@ func _process(delta):
 			for target in targets:
 				if target != self:
 					target.death()
+		get_node("AnimationPlayer").play("attack")
 
 func _fixed_process(delta):
 	var velocity_x = 0
@@ -54,7 +55,7 @@ func _fixed_process(delta):
 		velocity_x = speed * delta
 		if not get_node("AnimationPlayer").is_playing() and !has_jumped:
 			get_node("AnimationPlayer").play("run");
-	elif get_node("AnimationPlayer").is_playing():
+	elif get_node("AnimationPlayer").is_playing() and get_node("AnimationPlayer").get_current_animation() == "run":
 		get_node("AnimationPlayer").stop()
 	
 	if has_jumped:
@@ -69,7 +70,7 @@ func _fixed_process(delta):
 		set_linear_velocity(Vector2(velocity_x, 0))
 		apply_impulse(Vector2(), Vector2(0, -speed * jump_factor * delta))
 		has_jumped = true
-		get_node("AnimationPlayer").play("jump");
+		get_node("AnimationPlayer").play("jump")
 
 func on_foot_body_enter(body):
 	if body != self:
