@@ -141,7 +141,7 @@ transform/scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 2
-frame = 4
+frame = 6
 
 [node name="foot" type="Area2D" parent="."]
 

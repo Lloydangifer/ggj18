@@ -11,7 +11,12 @@ var base_gravity = get_gravity_scale()
 var spawn_point
 var teleport_cooldown = 1.0
 var teleport_cooldown_progress =0.0
-var has_sword = true
+var has_sword = rand_range(0.0, 1.0) > 0.5
+var heavy = rand_range(0.0, 1.0) > 0.5
+var big = rand_range(0.0, 1.0) > 0.5
+var sword_pos_out
+var sword_pos_sheathe
+var big_scale = 2
 
 func _ready():
 	spawn_point = get_pos()
@@ -24,6 +29,18 @@ func _ready():
 		get_node("attack").set_scale(Vector2(4.0,1.0))
 	else:
 		get_node("attack").set_scale(Vector2(1.0,1.0))
+	if heavy:
+		set_gravity_scale(5)
+		base_gravity = 5
+	sword_pos_sheathe = Vector2(-6.0, -8.5)
+	sword_pos_out = get_node("sword").get_pos()
+	if big: 
+		sword_pos_sheathe *= big_scale
+		sword_pos_out *= big_scale
+		for child in get_children():
+			if child extends Node2D:
+				child.set_scale(child.get_scale()*big_scale)
+				child.set_pos(child.get_pos()*big_scale)
 
 func _process(delta):
 	if teleport_cooldown_progress < teleport_cooldown:
@@ -100,13 +117,13 @@ func death():
 func show_sword():
 	if has_sword:
 		get_node("sword").set_rotd(270)
-		get_node("sword").set_pos(Vector2(-97.0, -46.5))
+		get_node("sword").set_pos(sword_pos_out)
 		get_node("sword").set_hidden(false)
 
 func sheathe():
 	if has_sword:
 		get_node("sword").set_rotd(50)
-		get_node("sword").set_pos(Vector2(-6.0, -8.5))
+		get_node("sword").set_pos(sword_pos_sheathe)
 		
 func hide_sword():
 	if has_sword:
