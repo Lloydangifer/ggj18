@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/scene_launch.gd" type="Script" id=1]
 [ext_resource path="res://scenes/environment/platform/platform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/environment/offlimit/offlimit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sound/sound_wav/game/music.wav" type="Sample" id=4]
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/music = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends SamplePlayer
+
+func _ready():
+	play(\"music\")"
 
 [node name="level_1" type="Node"]
 
@@ -61,5 +78,23 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+script/script = SubResource( 2 )
 
 
