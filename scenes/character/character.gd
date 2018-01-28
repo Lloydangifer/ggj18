@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal player_death
+
 export var player_number = 1
 
 var speed = 10000
@@ -11,9 +13,9 @@ var base_gravity = get_gravity_scale()
 var spawn_point
 var teleport_cooldown = 1.0
 var teleport_cooldown_progress = 0.0
-var has_sword = rand_range(0.0, 1.0) > 0.5
-var heavy = rand_range(0.0, 1.0) > 0.5
-var big = rand_range(0.0, 1.0) > 0.5
+var has_sword
+var heavy
+var big
 var sword_pos_out
 var sword_pos_sheathe
 var big_scale = 2
@@ -23,6 +25,7 @@ var is_dashing = false
 var dashing_duration = 0.5
 var dashing_vanish_progress = 0.0
 var dash_speed_factor = 5.0
+var transmission
 
 func _ready():
 	spawn_point = get_pos()
@@ -32,9 +35,10 @@ func _ready():
 	if not Input.is_joy_known(player_number-1):
 		print("ATTENTION, la manette ", player_number, " n'est pas détectée !!")
 	randomize()
-	has_sword = randf() > 0.5
-	heavy = randf() > 0.5
-	big = randf() > 0.5
+	if !transmission:
+		has_sword = randf() > 0.5
+		heavy = randf() > 0.5
+		big = randf() > 0.5
 	if has_sword:
 		get_node("attack").set_scale(Vector2(4.0,1.0))
 	else:
@@ -145,6 +149,7 @@ func teleport():
 	set_pos(enemy_pos + Vector2(enemy_size + self_size+1.0,0.0))
 
 func death():
+	emit_signal("player_death", player_number)
 	queue_free()
 	
 func show_sword():
