@@ -6,11 +6,11 @@ var first_scene
 var winner_heavy
 var winner_big
 var winner_sworded
-var heavy_odd = 0.3
-var big_odd = 0.3
+var heavy_odd = 0.2
+var big_odd = 0.2
 var sworded_odd = 0.5
-var heavy_modifier = 0.2
-var big_modifier = 0.2
+var heavy_modifier = 0.1
+var big_modifier = 0.1
 var sworded_modifier = 0.2
 
 func _ready():

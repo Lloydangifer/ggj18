@@ -41,6 +41,9 @@ func on_combat_finished(scene, winner_heavy, winner_big, winner_sworded):
 	last_winner_carac["heavy"] = winner_heavy
 	last_winner_carac["big"] = winner_big
 	last_winner_carac["sworded"] = winner_sworded
+	random_level()
+
+func random_level():
 	randomize()
 	var level = randi()%3
 	goto_scene(levels_names[level])

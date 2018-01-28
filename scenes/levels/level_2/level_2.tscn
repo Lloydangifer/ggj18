@@ -19,7 +19,7 @@ samples/music = {
 script/source = "extends SamplePlayer
 
 func _ready():
-	play(\"music)"
+	play(\"music\")"
 
 [node name="level_2" type="Node"]
 
