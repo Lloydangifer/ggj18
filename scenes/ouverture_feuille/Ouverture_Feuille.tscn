@@ -84,6 +84,16 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("RichTextLabel:visibility/visible")
+tracks/6/interp = 1
+tracks/6/imported = false
+tracks/6/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="Node" type="Node"]
 
@@ -143,5 +153,40 @@ transform/pos = Vector2( 700, 400 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.24, 0.24 )
 texture = ExtResource( 6 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 504.0
+margin/top = 153.0
+margin/right = 929.0
+margin/bottom = 553.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode/enabled = false
+bbcode/bbcode = "	BUT DU JEU :
+
+
+		- Vous devez vous battre jusqu'à la mort.
+	
+	
+	
+		- Un seul coup est nécessaire pour occire votre adversaire.
+	
+	
+	
+		- A la fin du duel, certaines caractéristiques du personnage 
+		
+		  vaiqueur transmises aléatoirement aux deux personnages 
+		
+		  du prochain duel.
+		
+		
+		
+		- Amusez vous !"
+visible_characters = -1
+percent_visible = 1.0
 
 
