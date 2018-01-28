@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/scene_launch.gd" type="Script" id=1]
 [ext_resource path="res://scenes/arene/test_anim.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sound/sound_wav/game/music.wav" type="Sample" id=3]
+[ext_resource path="res://scenes/environment/offlimit/offlimit.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -23,7 +24,7 @@ samples/music = {
 script/source = "extends SamplePlayer
 
 func _ready():
-	play(\"music\")"
+	play(\"m_lakalite\")"
 
 [node name="skyscraper" type="Node"]
 
@@ -88,5 +89,25 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+
+[node name="offlimit" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 751.982, -130.142 )
+transform/scale = Vector2( 33.9803, 1 )
+
+[node name="offlimit 2" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 764.972, 979.488 )
+transform/scale = Vector2( 34.0025, 1 )
+
+[node name="offlimit 3" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -318.505, 423.909 )
+transform/scale = Vector2( 1, 17.5649 )
+
+[node name="offlimit 4" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1821.99, 422.197 )
+transform/scale = Vector2( 1, 17.1903 )
 
 
