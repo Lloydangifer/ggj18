@@ -1,0 +1,147 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://scenes/ouverture_feuille/fr1.tex" type="Texture" id=1]
+[ext_resource path="res://scenes/ouverture_feuille/fr2.tex" type="Texture" id=2]
+[ext_resource path="res://scenes/ouverture_feuille/fr3.tex" type="Texture" id=3]
+[ext_resource path="res://scenes/ouverture_feuille/fr4.tex" type="Texture" id=4]
+[ext_resource path="res://scenes/ouverture_feuille/fr5.tex" type="Texture" id=5]
+[ext_resource path="res://scenes/ouverture_feuille/fr6.tex" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	get_node(\"AnimationPlayer\").play(\"Bouton_feuille_anim\")
+"
+
+[sub_resource type="Animation" id=2]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("fr1:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("fr2:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.2, 0.4 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("fr3:visibility/visible")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 0.4, 0.6 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("fr4:visibility/visible")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0, 0.6, 0.8 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("fr5:visibility/visible")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = {
+"times": FloatArray( 0, 0.8, 1 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("fr6:visibility/visible")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="Node" type="Node"]
+
+script/script = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Bouton_feuille_anim = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="fr1" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 100, 100 )
+transform/scale = Vector2( 0.12501, 0.12501 )
+texture = ExtResource( 1 )
+
+[node name="fr2" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 150, 150 )
+transform/scale = Vector2( 0.203201, 0.203201 )
+texture = ExtResource( 2 )
+
+[node name="fr3" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 300, 250 )
+transform/scale = Vector2( 0.208632, 0.208632 )
+texture = ExtResource( 3 )
+
+[node name="fr4" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 450, 350 )
+transform/rot = 270.0
+transform/scale = Vector2( 0.208966, 0.208966 )
+texture = ExtResource( 4 )
+
+[node name="fr5" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 700, 400 )
+transform/rot = 270.0
+transform/scale = Vector2( 0.258294, 0.258294 )
+texture = ExtResource( 5 )
+
+[node name="fr6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 700, 400 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.24, 0.24 )
+texture = ExtResource( 6 )
+
+

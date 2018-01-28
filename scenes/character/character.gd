@@ -81,6 +81,7 @@ func _process(delta):
 				if target != self and target extends RigidBody2D:
 					target.death()
 		get_node("AnimationPlayer").play("attack")
+		get_node("SamplePlayer").play("sword")
 
 func _fixed_process(delta):
 	var velocity_x = 0
@@ -111,6 +112,7 @@ func _fixed_process(delta):
 		apply_impulse(Vector2(), Vector2(0, -speed * jump_factor * delta))
 		has_jumped = true
 		get_node("AnimationPlayer").play("jump")
+		get_node("SamplePlayer").play("jump")
 	
 	if Input.is_action_pressed("character_" + String(player_number) + "_dash_left"):
 		if dash_cooldown_progress >= dash_cooldown:
@@ -135,6 +137,7 @@ func respawn():
 	set_pos(spawn_point)
 
 func death():
+	get_node("SamplePlayer").play("dead")
 	emit_signal("player_death", player_number)
 	queue_free()
 	
