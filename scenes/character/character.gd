@@ -18,7 +18,7 @@ var heavy
 var big
 var sword_pos_out
 var sword_pos_sheathe
-var big_scale = 2
+var big_scale = 1.25
 var dash_cooldown = 5.0
 var dash_cooldown_progress = 0.0
 var is_dashing = false

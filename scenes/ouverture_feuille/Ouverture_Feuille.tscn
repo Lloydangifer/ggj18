@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scenes/ouverture_feuille/fr1.tex" type="Texture" id=1]
 [ext_resource path="res://scenes/ouverture_feuille/fr2.tex" type="Texture" id=2]
@@ -104,6 +104,16 @@ tracks/7/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends Button
+
+func _ready():
+	connect(\"pressed\", self, \"_on_pressed\")
+
+func _on_pressed():
+	g_scene_manager.goto_scene(\"splashscreen\")"
 
 [node name="Node" type="Node"]
 
@@ -215,5 +225,6 @@ shortcut = null
 text = "Retourner au menu"
 flat = false
 clip_text = true
+script/script = SubResource( 3 )
 
 

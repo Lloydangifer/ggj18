@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://scenes/splashscreen/dab_final.tex" type="Texture" id=1]
 [ext_resource path="res://scenes/splashscreen/dab_medium.tex" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/splashscreen/black_background.png" type="Texture" id=4]
 [ext_resource path="res://scenes/splashscreen/game_logo.tex" type="Texture" id=5]
 [ext_resource path="res://scenes/splashscreen/grue_eclair.tex" type="Texture" id=6]
+[ext_resource path="res://sound/sound_wav/menu/superpaperlegacy.wav" type="Sample" id=7]
+[ext_resource path="res://sound/sound_wav/menu/menu_music.wav" type="Sample" id=8]
 
 [sub_resource type="GDScript" id=1]
 
@@ -268,23 +270,40 @@ func _process(delta):
 	
 
 func _on_pressed():
-	g_scene_manager.goto_scene(\"test\")"
+	g_scene_manager.random_level()"
 
 [sub_resource type="SampleLibrary" id=10]
 
+samples/superpaperlegacy = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
 
 [sub_resource type="GDScript" id=11]
 
 script/source = "extends SamplePlayer
 
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
+func _ready():
+	play(\"superpaperlegacy\")
+"
+
+[sub_resource type="SampleLibrary" id=12]
+
+samples/menu_music = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 8 )
+}
+
+[sub_resource type="GDScript" id=13]
+
+script/source = "extends SamplePlayer
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	play(\"menu_music\")
 "
 
 [node name="Control" type="Control"]
@@ -508,5 +527,23 @@ default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
 script/script = SubResource( 11 )
+
+[node name="SamplePlayer 2" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 12 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+script/script = SubResource( 13 )
 
 
