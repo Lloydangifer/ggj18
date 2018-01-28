@@ -94,6 +94,16 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Button:visibility/visible")
+tracks/7/interp = 1
+tracks/7/imported = false
+tracks/7/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="Node" type="Node"]
 
@@ -160,10 +170,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 504.0
-margin/top = 153.0
-margin/right = 929.0
-margin/bottom = 553.0
+margin/left = 500.0
+margin/top = 150.0
+margin/right = 952.0
+margin/bottom = 550.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode/enabled = false
 bbcode/bbcode = "	BUT DU JEU :
@@ -188,5 +198,22 @@ bbcode/bbcode = "	BUT DU JEU :
 		- Amusez vous !"
 visible_characters = -1
 percent_visible = 1.0
+
+[node name="Button" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 597.0
+margin/top = 526.0
+margin/right = 797.0
+margin/bottom = 576.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Retourner au menu"
+flat = false
+clip_text = true
 
 
