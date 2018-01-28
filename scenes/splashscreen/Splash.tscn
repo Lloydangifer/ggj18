@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=12 format=1]
 
-[ext_resource path="res://20180127_152539_clean.tex" type="Texture" id=1]
-[ext_resource path="res://20180127_152508_clean.tex" type="Texture" id=2]
-[ext_resource path="res://20180127_152554_clean.tex" type="Texture" id=3]
-[ext_resource path="res://20180128_084211_clean.tex" type="Texture" id=4]
+[ext_resource path="res://scenes/splashscreen/20180127_152508_clean.tex" type="Texture" id=1]
+[ext_resource path="res://scenes/splashscreen/20180127_152554_clean.tex" type="Texture" id=2]
+[ext_resource path="res://scenes/splashscreen/20180128_084211_clean.tex" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 
@@ -111,14 +110,13 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 
-resource/name = "ReverseAnimation"
 length = 1.0
 loop = false
 step = 0.1
@@ -163,9 +161,8 @@ tracks/3/keys = {
 "values": [ Vector2( 931.771, 439.535 ), Vector2( 147.115, 437.41 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
-resource/name = "loop"
 length = 1.5
 loop = true
 step = 0.1
@@ -195,7 +192,7 @@ tracks/1/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=8]
 
 script/source = "extends CollisionShape2D
 
@@ -253,7 +250,7 @@ autoplay = ""
 transform/pos = Vector2( 139.668, 449.3 )
 transform/scale = Vector2( 4.34194, 4.44916 )
 input/pickable = false
-shapes/0/shape = SubResource( 8 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1.2955, 0, 0, 3.10973, 8.36054, -0.0075922 )
 shapes/0/trigger = true
 collision/layers = 1
@@ -275,20 +272,20 @@ texture = ExtResource( 1 )
 visibility/visible = false
 transform/pos = Vector2( 4.18976, -0.565842 )
 transform/scale = Vector2( 0.0448211, 0.0553231 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 
 [node name="20180127_152554_clean" type="Sprite" parent="Control/AnimationPlayer/RigidBody2D"]
 
 visibility/opacity = 0.99
 transform/pos = Vector2( 10.021, -2.75872 )
 transform/scale = Vector2( 0.0441108, 0.0434675 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control/AnimationPlayer/RigidBody2D"]
 
 transform/pos = Vector2( 8.36054, -0.0075922 )
 transform/scale = Vector2( 1.2955, 3.10973 )
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 trigger = true
 _update_shape_index = 0
 
@@ -297,8 +294,8 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/ReverseAnimation = SubResource( 4 )
-anims/loop = SubResource( 5 )
+anims/ReverseAnimation = SubResource( 5 )
+anims/loop = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -323,7 +320,7 @@ bounce = 0.0
 
 visibility/visible = false
 transform/scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 flip_h = true
 
 [node name="Sprite 2" type="Sprite" parent="Control/AnimationPlayerOpposite/RigidBody2D"]
@@ -336,7 +333,7 @@ flip_h = true
 [node name="Sprite 3" type="Sprite" parent="Control/AnimationPlayerOpposite/RigidBody2D"]
 
 transform/scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control/AnimationPlayerOpposite/RigidBody2D"]
@@ -346,12 +343,12 @@ transform/scale = Vector2( 1.81314, 2 )
 shape = SubResource( 7 )
 trigger = true
 _update_shape_index = 0
-script/script = SubResource( 9 )
+script/script = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 560.88, -159.614 )
 transform/scale = Vector2( 0.0717093, 0.0968219 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 
