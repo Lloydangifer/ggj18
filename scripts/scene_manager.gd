@@ -4,10 +4,13 @@ var current_scene
 
 var last_winner_carac = {}
 var first_load = true
+var levels_names = []
 
 func _ready():
 	current_scene = "splashscreen"
 	set_pause_mode(PAUSE_MODE_PROCESS)
+	levels_names.append("level_1")
+	levels_names.append("skyscraper")
 
 func get_current_scene():
 	return current_scene
@@ -37,4 +40,8 @@ func on_combat_finished(scene, winner_heavy, winner_big, winner_sworded):
 	last_winner_carac["heavy"] = winner_heavy
 	last_winner_carac["big"] = winner_big
 	last_winner_carac["sworded"] = winner_sworded
-	goto_scene("level_1")
+	randomize()
+	var level = randi()%2
+	print(String(level))
+	print(levels_names[level])
+	goto_scene(levels_names[level])
