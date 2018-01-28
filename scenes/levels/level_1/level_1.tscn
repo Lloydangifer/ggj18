@@ -12,10 +12,6 @@ script/script = ExtResource( 1 )
 
 transform/pos = Vector2( 266.799, 722.016 )
 
-[node name="platform 2" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 889.331, 720.509 )
-
 [node name="platform 3" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 1425.94, 720.509 )

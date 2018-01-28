@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 268.593, 31.586 )
+extents = Vector2( 379.393, 26.4866 )
 
 [node name="platform" type="StaticBody2D"]
 
@@ -22,6 +22,7 @@ bounce = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
 
+transform/scale = Vector2( 0.391022, 0.239 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

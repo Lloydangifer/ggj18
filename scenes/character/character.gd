@@ -57,12 +57,6 @@ func _ready():
 				child.set_pos(child.get_pos()*big_scale)
 
 func _process(delta):
-	if teleport_cooldown_progress < teleport_cooldown:
-		teleport_cooldown_progress += delta
-	elif Input.is_action_pressed("character_" + String(player_number) + "_teleport"):
-		#teleport()
-		teleport_cooldown_progress = 0
-	
 	if dash_cooldown_progress < dash_cooldown:
 		dash_cooldown_progress += delta
 	
@@ -139,14 +133,6 @@ func on_foot_body_enter(body):
 
 func respawn():
 	set_pos(spawn_point)
-
-func teleport():
-	var enemy_pos = get_tree().get_root().get_child(0).get_node("character " + String(-player_number+3)).get_global_pos()
-	var enemy_size = get_tree().get_root().get_child(0).get_node("character " + String(-player_number+3)).get_node("CollisionShape2D").get_item_rect().size.x /2
-	var self_size = get_node("CollisionShape2D").get_item_rect().size.x / 2
-	print("enemy size:" + String(enemy_size))
-	print("self size:" + String(self_size))
-	set_pos(enemy_pos + Vector2(enemy_size + self_size+1.0,0.0))
 
 func death():
 	emit_signal("player_death", player_number)
