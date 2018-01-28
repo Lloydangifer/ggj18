@@ -14,20 +14,20 @@ func get_current_scene():
 	
 func goto_scene(name) :
 	current_scene = name
-	g_loader.load_interactive("res://scenes/"+name+"/"+name+".tscn")
+	g_loader.load_interactive("res://scenes/levels/"+name+"/"+name+".tscn")
 	g_loader.connect("loading_finished", self, "_on_loading_finished")
 	
 func _on_loading_finished(scene):
 	g_loader.disconnect("loading_finished", self, "_on_loading_finished")
 	get_tree().get_current_scene().queue_free()
-	if scene.get_name() != "splashscreen" and scene.get_name() != "rules":
-		scene.first_scene = first_load
-		if !first_load:
-			scene.winner_heavy = last_winner_carac["heavy"]
-			scene.winner_big = last_winner_carac["big"]
-			scene.winner_sworded = last_winner_carac["sworded"]
-		first_load = false
 	var scene_inst = scene.instance()
+	if scene_inst.get_name() != "splashscreen" and scene_inst.get_name() != "rules":
+		scene_inst.first_scene = first_load
+		if !first_load:
+			scene_inst.winner_heavy = last_winner_carac["heavy"]
+			scene_inst.winner_big = last_winner_carac["big"]
+			scene_inst.winner_sworded = last_winner_carac["sworded"]
+		first_load = false
 	get_tree().get_root().add_child(scene_inst)
 	get_tree().set_current_scene(scene_inst);
 	scene_inst.connect("we_have_a_winner",self,"on_combat_finished")

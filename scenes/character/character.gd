@@ -84,7 +84,7 @@ func _process(delta):
 		else:
 			var targets = get_node("attack").get_overlapping_bodies()
 			for target in targets:
-				if target != self:
+				if target != self and target extends RigidBody2D:
 					target.death()
 		get_node("AnimationPlayer").play("attack")
 
