@@ -19,7 +19,6 @@ func _ready():
 	# Initialization here
 	get_node(\"Control/AnimationPlayer\").play(\"Slide\")
 	get_node(\"Control/AnimationPlayerOpposite\").play(\"ReverseAnimation\")
-	print(\"coucou\")
 	
 
 func launch_loop():

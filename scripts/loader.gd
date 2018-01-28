@@ -26,7 +26,7 @@ func _process(delta):
 		print("[Loader]:\tInteractive load succeeded !")
 		
 	elif status == OK:
-		print("[Loader]:\tLoading ok")
+		print("[Loader]:\tLoading in progress...")
 	else: # error
 		loader = null
 		print("[Loader] ERROR:\tInteractive load failed !")
