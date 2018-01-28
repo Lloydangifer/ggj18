@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scenes/splashscreen/dab_final.tex" type="Texture" id=1]
 [ext_resource path="res://scenes/splashscreen/dab_medium.tex" type="Texture" id=2]
@@ -195,6 +195,23 @@ tracks/1/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
+[sub_resource type="GDScript" id=8]
+
+script/source = "extends Button
+
+func _ready():
+	connect(\"pressed\", self, \"_on_pressed\")
+	set_process(true)
+	pass
+
+func _process(delta):
+	if g_scene_manager.get_current_scene() != \"splashscreen\" :
+		return
+	
+
+func _on_pressed():
+	g_scene_manager.goto_scene(\"test\")"
+
 [node name="Control" type="Control"]
 
 focus/ignore_mouse = false
@@ -336,21 +353,22 @@ transform/pos = Vector2( 978.267, 135.09 )
 transform/scale = Vector2( 85.5834, 75.3048 )
 texture = ExtResource( 4 )
 
-[node name="Button" type="Button" parent="Control"]
+[node name="play" type="Button" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 957.0
-margin/top = 404.0
+margin/top = 402.0
 margin/right = 1191.0
-margin/bottom = 491.0
+margin/bottom = 489.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "PLAY"
 flat = false
+script/script = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
